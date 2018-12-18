@@ -252,24 +252,15 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
         * A class, struct, or enum declaration that makes the claim to implement the protocol
         * The code in said class, struct or enum that implements the protocol
     * Normally, the implementer must implement all the methods/properties, but marking a protocol ‘@objc’ and using ‘optional’ methods, you can use the old objective C code that allows you to skip some implementation (not to be confused with the type Optional)
-    * Declaration
-    
-<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Protocol%20Declaration.png" width="600" height="150">    
-  
-    * Implementing
-    
-<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Protocol%20Implementation.png" width="750" height="150">      
-    
-    
     * Any number of protocols can be implemented by a given class, struct or enum
     * In a class, inits must be marked ‘required’ (or the subclass might not conform) 
     * Can add protocol conformance via an extension too
-    * Example (Red = error):
+    
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Protocol%20Declaration.png" width="600" height="150">
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Protocol%20Implementation.png" width="750" height="150">
     
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Protocol%20Example.png" width="550" height="250">
-
-
-
 
 #### Delegation
 * Very important use of protocols
@@ -306,11 +297,22 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 #### Closures
 * Reference type
 * Use a closure (an in-line function) to be as simple as possible
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Example.png" width="400" height="100">
+
 * Using ‘.map’ (takes a function as an argument and applies it to each element) with a closure
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Map.png" width="600" height="150">
+
 * You can execute a closure to do initialization of a property
 * Useful with ‘lazy’ because the last () means it will execute the initialized right when it gets called
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Init.png" width="375" height="100">
+
 * Using a closure that captures variables from surrounding code could create a memory cycle
     * If you capture a class that arrayOfOperations is in, this closure is pointing to the class, and that class is pointing to the closure (use unowned to break it)
+    
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Capture.png" width="700" height="150">
 
 
 
