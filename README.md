@@ -116,6 +116,168 @@ Quick notes taken for Stanford's CS193P iTunes U Course
 ## Lecture 3 and 4
 **Swift Programming Language**
 
+#### Stack view
+* Grouped in horizontal or vertical (can be stacked multiple times to make a grid or something similar)
+* Use standard spacing when possible
+* Ctrl-drag object to top/bottom/sides of the view to select constraint relationship
+
+#### Countable Range
+* Create a countable range with floats/doubles 
+* Stride()
+
+#### Tuples
+* Group values together
+* Example: Let x: (Name1: String, Name2: Int, Name3: Double) = (“Hello”, 5, 0.85)
+* Can rename these or change values also
+* A function can return the tuple as a group of values (such as height and weight)
+
+#### Computed Properties
+* A value can be computed rather than stored
+* If you only want a read only property – just use get
+* Usually these are used when you want to keep values in sync or when something is derived from a state in the program
+
+#### Access Control
+* Usually for large programming projects (multiple files and developers)
+* Keywords (put in front of vars and funcs)
+    * Internal – default, usable by anything in my app or framework
+    * Private – only callable from within the object
+    * Private(set) – setting a var is private, but getting a var is possible outside the object
+    * Fileprivate – usable by any code in the source file
+    * Public (frameworks only) – can be used by objects outside my framework
+    * Open (frameworks only) – public and they can subclass/override it
+* It’s suggested to make things private until you know what vars and funcs that other things can call and use
+
+#### Asserts
+* Lets app crash and displays a message if there is an error
+* Example: If something calls a method at index 100 but there are only 12 indices
+
+#### Extensions
+* Ability to add vars and funcs to other any other classes (even if you don’t have a source
+* Restriction - No storage (but can use computed)
+* Problems
+    * Easily abused – don’t add a var or func that doesn’t make sense for that class (obfuscation)
+    * Requires architectural commitment to organize code
+* Best used (for beginners) for small, well-contained helper functions
+* Good semantics – don’t let it crash when called
+* When in doubt, don’t do it
+* Example: Extend int to give a random number when called
+
+#### Enums
+* Value type (like a struct) – copied as it is passed around
+* Only uses discrete values
+* Simple data structure
+* Each case can have associated data or values (kind of like tuples)
+* Setting the value of an enum – Can use type inference on one side of the equals sign
+* Checking an enum state – use a switch statement
+* Must handle all possible cases in the switch statement
+    * Use ‘break’ instead of print (in the example) to skip that case
+    * Use ‘default:’ to handle all the other cases if you don’t want to write them out
+* Can use multiple lines of code, and doesn’t move on to the next case - no fall through by default (use the ‘fallthrough’ keyword)
+* Associated data is accessed through a switch using the ‘let’ syntax
+    * Can also rename the local variables to print
+* Can have methods and computed properties but no stored values
+* If you want to reassign ‘self’ to another value in a func, you must have ‘mutating’ because enum is a value type (all value types need to know when a value can change, such as struct)
+
+#### Optionals
+* An optional is just a special enum with 2 cases (nil, and some associated data of a certain type)
+* ? declares an optional
+* ! force unwraps the associated data (could crash app if its nil)
+    * Safe way is using ‘if let’ to check if it is set
+* ?? defaults to a value if an optional is not set
+* ? can also be used for optional chaining
+    * If anything is nil, it just bails out of the sequence and returns nil
+    * Example: If x, foo(), and bar are optionals
+
+#### Memory Management
+* Automatic Reference Counting (Not garbage collection)
+* Reference types are stored in the heap
+* Every time you create a pointer to a reference type, Swift keeps track of it, and when there are zero references, they get tossed out
+* Strong
+    * Default, not typed out in the code
+* Weak 
+    * If nothing is interested in it, set it to nil
+    * Will never keep an object in the heap
+    * Only works with optional pointers to reference types
+    * Usually on outlets (since those are optionals like UILabel!) and delegates
+* Unowned
+    * Very rare, because it’s like trying to outsmart the ARC
+    * The programmer has to know not to access it when it’s not in the heap
+    * Use it to avoid a memory cycle – 2 pointers linked only to each other in the heap, so they both stay in the heap for no reason
+
+#### Data Structures
+* Essential building concepts – class, struct, enum, protocol
+* Class
+    * Reference type
+    * Single inheritance of both functionality and data (instance variables)
+    * The heap is automatically kept clean by Swift
+* Struct
+    * Value type (structs don’t live in the heap and are passed around by copying them)
+    * “Copy on write” behavior, so it requires you to mark ‘mutating’ methods
+    * No inheritance of data
+    * Examples of common structs: Array, Dictionary, String, Character, Int, Double
+* Enum
+    * Value type
+    * Used for variables that have one of a discrete set of values
+    * Each option can have associated data with it
+    * Can have methods and computed properties
+* Protocol
+    * A protocol is a type (just like class, struct, enum)
+    * Just a list of vars and funcs – no data storage
+    * A way to express an API better
+        * More flexible and expressive
+        * Better blind and structured communication between view and controller
+        * Mandating behavior
+        * Sharing functionality between types
+    * Basically provides multiple inheritance of functionality (not storage)
+    * Aspects to a protocol
+        * Declaration (which properties and methods are in it)
+        * A class, struct, or enum declaration that makes the claim to implement the protocol
+        * The code in said class, struct or enum that implements the protocol
+    * Normally, the implementer must implement all the methods/properties, but marking a protocol ‘@objc’ and using ‘optional’ methods, you can use the old objective C code that allows you to skip some implementation (not to be confused with the type Optional)
+    * Declaration
+    * Implementing
+    * Any number of protocols can be implemented by a given class, struct or enum
+    * In a class, inits must be marked ‘required’ (or the subclass might not conform) 
+    * Can add protocol conformance via an extension too
+    * Example (Red = error):
+
+#### Delegation
+* Very important use of protocols
+* Multiple Inheritance functionality
+    * Example: Arrays, Dictionaries, CountableRanges (for loops), and Strings implement the protocols Sequence and Collection, because they are sequences and therefore a collection of things – that’s why you can use ‘index(of:)’
+
+#### Strings
+* Value type (it’s a struct)
+* Collection of characters (more specifically Unicodes)
+* The index of a string cannot be an int
+    * The problem: The string “café” might have 4 Unicodes (with é) or 5 Unicodes (with a regular e and another to put an accent on it)
+* Simplest ways to get an index are ‘startIndex’, ‘endIndex’, and ‘index(of:)’
+* To move to another index, use ‘index(String.Index, offsetBy: Int)’
+* Use ‘.insert’ or ‘+’ to modify or add on to strings
+
+#### NSAttributedString
+* Not a string, it’s a class (reference type)
+* Uses a dictionary of attributes attached each character or a whole string (such as UIColor or UIFont)
+* Can put NSAttributedString on UILabels, UIButtons, or drawing on screen
+* Look up dictionary keys to set different values in the Apple documentation
+    * Example 1: The red is needed for old Objective C compatibility (it still works)
+    * Example 2: You can use didSet{} on @IBOutlets to initialize the attributedString too (or else the label attributes wont update until the value is changed)
+
+#### Function Types
+* Functions are types
+* You can declare a variable, parameters to a method, etc. to be a type “function”
+
+#### Closures
+* Reference type
+* Use a closure (an in-line function) to be as simple as possible
+* Using ‘.map’ (takes a function as an argument and applies it to each element) with a closure
+* You can execute a closure to do initialization of a property
+* Useful with ‘lazy’ because the last () means it will execute the initialized right when it gets called
+* Using a closure that captures variables from surrounding code could create a memory cycle
+    * If you capture a class that arrayOfOperations is in, this closure is pointing to the class, and that class is pointing to the closure (use unowned to break it)
+
+
+
 ## Lecture 5
 **Drawing**
 
