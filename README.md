@@ -68,6 +68,9 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Controller = How the model is presented to the user (UI logic)	
 * View = The controller’s generic minions (UILabels, UIButtons, etc.)
 
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/MVC.png" width="425" height="250">
+
+
 #### Struct vs Class
 * Almost the same, but structs have no inheritance 
 * Structs are value types = It gets copied when used (pass it as an argument, assign it to a variable, put it in array)
@@ -86,6 +89,8 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Vars or funcs are stored with the type, not individual instances of the struct
 * Ex: ‘var isFaceUp’ is a value stored on an individual card, whereas ‘static var identifierFactory’ is only within the struct
 
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Static%20Example.png" width="375" height="250">
+
 #### Lazy Vars
 * Doesn’t initialize until you try to use it
 * Used when you’re stuck needing a class or struct loop that’s not initialized
@@ -100,6 +105,8 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 #### Checking an optional - If statement simplification
 * Check if the optional is set and do something, if not, do something else
 * Example: The if statement in the picture is the same as the last return statement
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Optional%20Example.png" width="300" height="150">
 
 #### Random Numbers
 * Only works with unsigned int and returns UInt32 (usually needs to be converted)
@@ -131,10 +138,14 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Can rename these or change values also
 * A function can return the tuple as a group of values (such as height and weight)
 
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Tuples.png" width="650" height="150">
+
 #### Computed Properties
 * A value can be computed rather than stored
 * If you only want a read only property – just use get
 * Usually these are used when you want to keep values in sync or when something is derived from a state in the program
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Computed%20Properties.png" width="450" height="150">
 
 #### Access Control
 * Usually for large programming projects (multiple files and developers)
@@ -151,6 +162,8 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Lets app crash and displays a message if there is an error
 * Example: If something calls a method at index 100 but there are only 12 indices
 
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Asserts%20Example.png" width="575" height="150">
+
 #### Extensions
 * Ability to add vars and funcs to other any other classes (even if you don’t have a source
 * Restriction - No storage (but can use computed)
@@ -162,13 +175,18 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * When in doubt, don’t do it
 * Example: Extend int to give a random number when called
 
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Extension%20Example.png" width="575" height="250">
+
 #### Enums
 * Value type (like a struct) – copied as it is passed around
 * Only uses discrete values
 * Simple data structure
 * Each case can have associated data or values (kind of like tuples)
-* Setting the value of an enum – Can use type inference on one side of the equals sign
-* Checking an enum state – use a switch statement
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Enums.png" width="600" height="250">
+
+* Can use type inference on one side of the equals sign while setting the value of an enum
+* Can use a switch statement to check the enum state
 * Must handle all possible cases in the switch statement
     * Use ‘break’ instead of print (in the example) to skip that case
     * Use ‘default:’ to handle all the other cases if you don’t want to write them out
