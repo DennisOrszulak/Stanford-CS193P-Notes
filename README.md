@@ -1,5 +1,5 @@
 # Stanford CS193P Notes
-Quick notes taken for Stanford's CS193P iTunes U Course
+Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 ## Table of Contents
 * [Lecture 1](#lecture-1)
