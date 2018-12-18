@@ -253,16 +253,30 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
         * The code in said class, struct or enum that implements the protocol
     * Normally, the implementer must implement all the methods/properties, but marking a protocol ‘@objc’ and using ‘optional’ methods, you can use the old objective C code that allows you to skip some implementation (not to be confused with the type Optional)
     * Declaration
+    
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Protocol%20Declaration.png" width="600" height="150">    
+  
     * Implementing
+    
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Protocol%20Implementation.png" width="750" height="150">      
+    
+    
     * Any number of protocols can be implemented by a given class, struct or enum
     * In a class, inits must be marked ‘required’ (or the subclass might not conform) 
     * Can add protocol conformance via an extension too
     * Example (Red = error):
+    
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Protocol%20Example.png" width="550" height="250">
+
+
+
 
 #### Delegation
 * Very important use of protocols
 * Multiple Inheritance functionality
     * Example: Arrays, Dictionaries, CountableRanges (for loops), and Strings implement the protocols Sequence and Collection, because they are sequences and therefore a collection of things – that’s why you can use ‘index(of:)’
+    
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Delegation.png" width="725" height="250">
 
 #### Strings
 * Value type (it’s a struct)
@@ -273,13 +287,17 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * To move to another index, use ‘index(String.Index, offsetBy: Int)’
 * Use ‘.insert’ or ‘+’ to modify or add on to strings
 
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Strings.png" width="675" height="250">
+
+
 #### NSAttributedString
 * Not a string, it’s a class (reference type)
 * Uses a dictionary of attributes attached each character or a whole string (such as UIColor or UIFont)
 * Can put NSAttributedString on UILabels, UIButtons, or drawing on screen
 * Look up dictionary keys to set different values in the Apple documentation
-    * Example 1: The red is needed for old Objective C compatibility (it still works)
-    * Example 2: You can use didSet{} on @IBOutlets to initialize the attributedString too (or else the label attributes wont update until the value is changed)
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Attributed%20Strings.png" width="600" height="250">
+
 
 #### Function Types
 * Functions are types
