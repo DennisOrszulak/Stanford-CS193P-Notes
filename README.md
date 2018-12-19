@@ -310,7 +310,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Using a closure that captures variables from surrounding code could create a memory cycle
     * If you capture a class that arrayOfOperations is in, this closure is pointing to the class, and that class is pointing to the closure (use unowned to break it)
     
-<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Capture.png" width="700" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Capture.png" width="725" height="150">
 
 
 
@@ -331,7 +331,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Use ‘as?’ to cast 
 * Usually done by casting an object from one of its superclasses down to a subclass (downcasting)
 
-<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Downcasting.png" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Downcasting.png" width="600" height="250">
 
 #### Interesting Classes
 * NSObject
@@ -363,7 +363,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     * ‘init(coder:NSCoder)’ if the UIView comes out of a storyboard
 * If you need an init, use both inits
 
-<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/View%20Init.png" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/View%20Init.png" width="600" height="250">
 
 * ‘awakeFromNib()’ is only called if a view is from a storyboard
 * Origin is in upper left 
@@ -373,7 +373,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * ‘var bounds: CGRect’ is a views drawing space
 * Use frame or center to position a view (never used to draw)
 
-<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/View%20Rotation.png" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/View%20Rotation.png" width="600" height="250">
 
 * Simple views are usually made in storyboard 
     * After you drag out a generic UIView, go to identity inspector and change it to your custom subclass
@@ -391,14 +391,14 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * UIBezierPath uses all the necessary drawing functions
 * Example: Draw a triangle (put this code in the 'override func draw' function)
 
-<img src=https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Drawing%20UIBezierPath.png"" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Drawing%20UIBezierPath.png" width="550" height="250">
 
 * Check out documentation for UIBezierPath to use ovals, clipping, hit detection, etc.
 * Use UIColor or color literals to set colors
     * To get transparency, use ‘.withAlphaComponent(0.someNumber)’ and let the system know with ‘var opaque = false’
 * Use preferred fonts to implement text accessibility options (smaller/larger text in iPhone settings)
 
-<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Preferred%20Fonts.png" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Preferred%20Fonts.png" width="450" height="150">
 
 * Init images using ‘let exampleImageName: UIImage? = (UIImage(named: “foo”)’ and draw them using ‘draw.exampleImageName()’ with a bunch of function options
     * Then add foo.jpg to the assets.xcassets file 
@@ -406,21 +406,6 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     * There is a property ‘var contentMode: UIViewContentMode’
         * Check documentation for properties (such as ‘.scaleToFill’ or ‘.redraw’)
     * When not using auto layout, use ‘override func layoutSubviews()’ to manually reposition views (don’t forget super)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## Lecture 6
 **Multitouch - Card Game Project Example**
@@ -432,7 +417,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     * Call 'setNeedsDisplay()' and 'setNeedsLayout'
 * This is used to help format the rank and suit text in the corners of the card
 
-<img src="" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Text%20Accessibility%20Example.png" width="500" height="150">
 
 #### Public vars
 * Always use ‘didSet{}’ and call ‘setNeedsDisplay()’ when you need to update (redraw) the view, along with ‘setNeedsLayout()’ if you need subviews to be redrawn too
@@ -447,7 +432,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * LayoutSubviews redraws the subviews (labels)
 * CGAffineTransform can rotate and translate views to make the bottom label upside down
 
-<img src="" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Labels%20and%20Transform%20Examples.png" width="600" height="250">
 
 #### Auto Layout
 * Drag and drop cursor to select views and pick constraints from the menu
@@ -457,7 +442,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Put ‘@IBDesignable’ a line above the class/struct so you can see it displayed in the storyboard (without pressing run)
     * Attach the ‘in: Bundle…’ section of code for compatibility to show images in storyboard and during runtime
 
-<img src="" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Autolayout%20Card%20Example.png" width="400" height="150">
 
 * Put ‘@IBInspectable’ above a var to have them show up in the storyboard attributes inspector
 
@@ -470,32 +455,23 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     * For discrete (e.g. a swipe), it goes strait to ‘.ended’ or ‘.recognized’, but also could go to ‘.failed’ or ‘.cancelled’
 * Types of recognizers (Pinch/Rotation/Swipe/Tap/LongPress)
 
-<img src="" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Recognizers%201.png" width="600" height="250">
 
-<img src="" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Recognizers%202.png" width="600" height="250">
 
 * Always switch on a state in the handler function
 * Example: Swipe through random playing cards
     * Use ‘nextCard’ method to get a rank and suit when swiped left or right
     * Any method that is the action has to be marked ‘@objc’
 
-<img src="" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Recognizer%20Example.png" width="400" height="150">
 
 * You can also drag and drop a recognizer from the object library onto a view and link that to code (When someone taps the card it will flip over)
-
-
-
-
-
 * For scaling the card (pinch gesture), the view must handle it with the appropriate vars and scaling equations
 * Reset the scale to 1.0 for reference because pinch is a continuous gesture (lots of small increments)
-* In ViewController class:
- 
-<img src="" width="400" height="150">
+* Example: Create pinch recognizer
 
-* In PlayingCardView class:
-
-<img src="" width="400" height="150">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/VC%20Swipe%20and%20Pinch.png" width="575" height="150">
 
 
 
