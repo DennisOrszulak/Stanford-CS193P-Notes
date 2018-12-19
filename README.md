@@ -56,7 +56,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * When set, it will have an associated value (such as int, string, bool, etc.)
 * Nil means an optional is not set
 * ! is assuming the optional is set and grab the associated value 
-* Ex: doesn’t print optional(3), just 3
+    * Example: doesn’t print optional(3), just 3
 * If the optional is nil, the app crashes
 * Find bugs easily by using ! on optionals (if you want to)
     
@@ -69,7 +69,6 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * View = The controller’s generic minions (UILabels, UIButtons, etc.)
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/MVC.png" width="425" height="250">
-
 
 #### Struct vs Class
 * Almost the same, but structs have no inheritance 
@@ -87,7 +86,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 #### Statics
 * Vars or funcs are stored with the type, not individual instances of the struct
-* Ex: ‘var isFaceUp’ is a value stored on an individual card, whereas ‘static var identifierFactory’ is only within the struct
+    * Example: ‘var isFaceUp’ is a value stored on an individual card, whereas ‘static var identifierFactory’ is only within the struct
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Static%20Example.png" width="375" height="250">
 
@@ -97,14 +96,13 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 #### Dictionary
 * Just an array with a custom identifier
-* Example: ‘var emoji = Dictionary<Int,String>()’
-* Example 2 (Same thing): var emoji = [Int:String]()
-* An empty dictionary that maps an int to a string
+    * Example 1: ‘var emoji = Dictionary<Int,String>()’
+    * Example 2: 'var emoji = [Int:String]()'
 * Looking up something in a dictionary returns an optional (since it might not be in the dictionary)
 
 #### Checking an optional - If statement simplification
 * Check if the optional is set and do something, if not, do something else
-* Example: The if statement in the picture is the same as the last return statement
+    * Example: The if statement in the picture is the same as the last return statement
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Optional%20Example.png" width="300" height="150">
 
@@ -114,8 +112,8 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 #### Converting Types
 * Create a new thing and pass the number using the specific initializer 
-* Example: UInt32(something.count)
-* Converts the int .count to a UInt32 value
+    * Example: UInt32(something.count)
+        * Converts the int .count to a UInt32 value
 
 
 
@@ -130,12 +128,12 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 #### Countable Range
 * Create a countable range with floats/doubles 
-* Stride()
+    * 'Stride()'
 
 #### Tuples
 * Group values together
-* Example: Let x: (Name1: String, Name2: Int, Name3: Double) = (“Hello”, 5, 0.85)
-* Can rename these or change values also
+    * Example: Let x: (Name1: String, Name2: Int, Name3: Double) = (“Hello”, 5, 0.85)
+        * Can rename these or change values also
 * A function can return the tuple as a group of values (such as height and weight)
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Tuples.png" width="650" height="150">
@@ -319,8 +317,203 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 ## Lecture 5
 **Drawing**
 
+#### Throwing an Error
+* Some methods can throw errors
+* Can also use optional errors ‘try?’ and it will create an optional of the return value if it is not set (where it fails and says nil)
+
+#### Any and AnyObject
+* Special types (it can be any type) – for compatibility with old Objective-C
+* Sometimes it’s in a faction’s argument
+* You have to convert it to a known type
+    * Use ‘as?’ to cast it (usually along with ‘if let’ at the beginning)
+
+#### Casting
+* Use ‘as?’ to cast 
+* Usually done by casting an object from one of its superclasses down to a subclass (downcasting)
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Downcasting.png" width="400" height="150">
+
+#### Interesting Classes
+* NSObject
+    * The root class of all classes from Objective-C
+* NSNumber
+    * Generic number-holding class (reference type)
+* Date
+    * Value type used to find out the date (See also Calendar, DateFormatter, DateComponents, etc.)
+* Data
+    * Value type (basically a bag of bits)
+    * Can be used for json and converting stuff
+    
+#### Coordinate System 
+* CGFloat – always use this for anything UIView coordinates (no doubles/floats)
+    * Use conversions ‘let cgf = CGFloat(anExampleDouble)’
+* CGPoint
+    * X and y
+* CGSize
+    * Width and height
+* Can combine CGPoint and CGSize to make a CGRect
+
+#### Views
+* Represents a rectangular area for drawing using coordinates
+* It is hierarchical
+    * The order of subviews matter since the most recent added thing is on top
+    * Usually built in storyboard, but can also be done in code
+* Avoid using inits in views, but there are two if needed
+    * ‘init(frame:CGRect)’ if the UIView is created in code
+    * ‘init(coder:NSCoder)’ if the UIView comes out of a storyboard
+* If you need an init, use both inits
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/View%20Init.png" width="400" height="150">
+
+* ‘awakeFromNib()’ is only called if a view is from a storyboard
+* Origin is in upper left 
+* Units are points, not pixels
+    * Depending on the device, a point could be 1, 2 or 3 pixels worth
+* Different views have their own coordinate system 
+* ‘var bounds: CGRect’ is a views drawing space
+* Use frame or center to position a view (never used to draw)
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/View%20Rotation.png" width="400" height="150">
+
+* Simple views are usually made in storyboard 
+    * After you drag out a generic UIView, go to identity inspector and change it to your custom subclass
+* For more complex views, you can create them in code for more flexibility and control
+
+#### Drawing (Core Graphics)
+* Only way to draw is using ‘override func draw(_ rect: CGRect)’
+* Never call ‘draw(CGRect)’
+    * If a view needs to be redrawn, use ‘setNeedsDisplay(_ rect: CGRect)’
+* Steps to draw
+    * Use ‘UIGraphicsGetCurrentContext’ to get a context to draw into (UIBezierPath does this automatically)
+    * Create paths using lines, arcs, jumps, etc.
+    * Set attributes like colors, fonts, linewidths, etc.
+    * Stroke or fill the created paths
+* UIBezierPath uses all the necessary drawing functions
+* Example: Draw a triangle (put this code in the 'override func draw' function)
+
+<img src=https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Drawing%20UIBezierPath.png"" width="400" height="150">
+
+* Check out documentation for UIBezierPath to use ovals, clipping, hit detection, etc.
+* Use UIColor or color literals to set colors
+    * To get transparency, use ‘.withAlphaComponent(0.someNumber)’ and let the system know with ‘var opaque = false’
+* Use preferred fonts to implement text accessibility options (smaller/larger text in iPhone settings)
+
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Preferred%20Fonts.png" width="400" height="150">
+
+* Init images using ‘let exampleImageName: UIImage? = (UIImage(named: “foo”)’ and draw them using ‘draw.exampleImageName()’ with a bunch of function options
+    * Then add foo.jpg to the assets.xcassets file 
+* Bounds can change
+    * There is a property ‘var contentMode: UIViewContentMode’
+        * Check documentation for properties (such as ‘.scaleToFill’ or ‘.redraw’)
+    * When not using auto layout, use ‘override func layoutSubviews()’ to manually reposition views (don’t forget super)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Lecture 6
-**Multitouch**
+**Multitouch - Card Game Project Example**
+
+#### Centering Text and implementing text accessibility (generic function)
+* Use preferred font and scale function with UIFontMetrics
+* Use paragraphStyle to center all the text
+* Use ‘traitCollectionDidChange’ to redraw the size of the accessibility text
+    * Call 'setNeedsDisplay()' and 'setNeedsLayout'
+* This is used to help format the rank and suit text in the corners of the card
+
+<img src="" width="400" height="150">
+
+#### Public vars
+* Always use ‘didSet{}’ and call ‘setNeedsDisplay()’ when you need to update (redraw) the view, along with ‘setNeedsLayout()’ if you need subviews to be redrawn too
+
+#### Constants 
+* You usually want to segregate constants from the main code
+* You can usually create an extension struct to set constants, and computed properties to take any other values and implement the constants
+
+#### Labels
+* Every time the bounds change, create the corner labels
+* ‘label.numberOfLines = 0’ means to use as many lines needed
+* LayoutSubviews redraws the subviews (labels)
+* CGAffineTransform can rotate and translate views to make the bottom label upside down
+
+<img src="" width="400" height="150">
+
+#### Auto Layout
+* Drag and drop cursor to select views and pick constraints from the menu
+* Change layout priority (if you have conflicting constraints)
+    * You can change from max (1000) to high (750) or low (250) and the layout will try to satisfy all the restraints to the best of its ability 
+        * Example: Trying to make a playing card as big as possible without going off the screen
+* Put ‘@IBDesignable’ a line above the class/struct so you can see it displayed in the storyboard (without pressing run)
+    * Attach the ‘in: Bundle…’ section of code for compatibility to show images in storyboard and during runtime
+
+<img src="" width="400" height="150">
+
+* Put ‘@IBInspectable’ above a var to have them show up in the storyboard attributes inspector
+
+#### Gestures
+* Two steps to use a gesture recognizer
+    * Adding a gesture recognizer to a UIView (asking the view to recognize that gesture)
+    * Providing a method to handle that gesture
+* Every time the recognizer state changes, the handler is called
+    * For continuous gestures (e.g. panning), it moves from ‘.began’ through repeated ‘.changed’ to ‘.ended’ states
+    * For discrete (e.g. a swipe), it goes strait to ‘.ended’ or ‘.recognized’, but also could go to ‘.failed’ or ‘.cancelled’
+* Types of recognizers (Pinch/Rotation/Swipe/Tap/LongPress)
+
+<img src="" width="400" height="150">
+
+<img src="" width="400" height="150">
+
+* Always switch on a state in the handler function
+* Example: Swipe through random playing cards
+    * Use ‘nextCard’ method to get a rank and suit when swiped left or right
+    * Any method that is the action has to be marked ‘@objc’
+
+<img src="" width="400" height="150">
+
+* You can also drag and drop a recognizer from the object library onto a view and link that to code (When someone taps the card it will flip over)
+
+
+
+
+
+* For scaling the card (pinch gesture), the view must handle it with the appropriate vars and scaling equations
+* Reset the scale to 1.0 for reference because pinch is a continuous gesture (lots of small increments)
+* In ViewController class:
+ 
+<img src="" width="400" height="150">
+
+* In PlayingCardView class:
+
+<img src="" width="400" height="150">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Lecture 7
 **Multiple MVC's, Timer, and Animation
