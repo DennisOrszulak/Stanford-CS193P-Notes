@@ -49,7 +49,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Swift is strongly typed, but Swift can guess which type (except UI objects)
     
 #### Property Observer
-* Every time some variable changes, execute code in ‘didSet{}’ (such as updating text in a label)
+* Every time some variable changes, execute code in `didSet{}` (such as updating text in a label)
     
 #### Optionals?
 * Can be in a set or not set state
@@ -82,11 +82,11 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 #### Class Initializers 
 * Classes can get a free init with no arguments as long as all their vars in that class are initialized
 * Structs – the free init initializes all of its vars, but can have a huge list of arguments to initialize
-* Use ‘self.’ to use distinguish between the same internal and external name on the initializer (or any other method, but usually on inits)
+* Use `self` to use distinguish between the same internal and external name on the initializer (or any other method, but usually on inits)
 
 #### Statics
 * Vars or funcs are stored with the type, not individual instances of the struct
-    * Example: ‘var isFaceUp’ is a value stored on an individual card, whereas ‘static var identifierFactory’ is only within the struct
+    * Example: `var isFaceUp` is a value stored on an individual card, whereas `static var identifierFactory` is only within the struct
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Static%20Example.png" width="375" height="250">
 
@@ -96,8 +96,8 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 #### Dictionary
 * Just an array with a custom identifier
-    * Example 1: ‘var emoji = Dictionary<Int,String>()’
-    * Example 2: 'var emoji = [Int:String]()'
+    * Example 1: `var emoji = Dictionary<Int,String>()`
+    * Example 2: `var emoji = [Int:String]()`
 * Looking up something in a dictionary returns an optional (since it might not be in the dictionary)
 
 #### Checking an optional - If statement simplification
@@ -127,13 +127,11 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Ctrl-drag object to top/bottom/sides of the view to select constraint relationship
 
 #### Countable Range
-* Create a countable range with floats/doubles 
-    * 'Stride()'
+* Can use `Stride()` to create a countable range with floats/doubles 
 
 #### Tuples
 * Group values together
-    * Example: Let x: (Name1: String, Name2: Int, Name3: Double) = (“Hello”, 5, 0.85)
-        * Can rename these or change values also
+    * Example: `let x: (Name1: String, Name2: Int, Name3: Double) = (“Hello”, 5, 0.85)`
 * A function can return the tuple as a group of values (such as height and weight)
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Tuples.png" width="650" height="150">
@@ -148,12 +146,12 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 #### Access Control
 * Usually for large programming projects (multiple files and developers)
 * Keywords (put in front of vars and funcs)
-    * Internal – default, usable by anything in my app or framework
-    * Private – only callable from within the object
-    * Private(set) – setting a var is private, but getting a var is possible outside the object
-    * Fileprivate – usable by any code in the source file
-    * Public (frameworks only) – can be used by objects outside my framework
-    * Open (frameworks only) – public and they can subclass/override it
+    * `internal` – default, usable by anything in my app or framework
+    * `private` – only callable from within the object
+    * `private(set)` – setting a var is private, but getting a var is possible outside the object
+    * `fileprivate` – usable by any code in the source file
+    * `public` (frameworks only) – can be used by objects outside my framework
+    * `open` (frameworks only) – public and they can subclass/override it
 * It’s suggested to make things private until you know what vars and funcs that other things can call and use
 
 #### Asserts
@@ -186,21 +184,21 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Can use type inference on one side of the equals sign while setting the value of an enum
 * Can use a switch statement to check the enum state
 * Must handle all possible cases in the switch statement
-    * Use ‘break’ instead of print (in the example) to skip that case
-    * Use ‘default:’ to handle all the other cases if you don’t want to write them out
-* Can use multiple lines of code, and doesn’t move on to the next case - no fall through by default (use the ‘fallthrough’ keyword)
-* Associated data is accessed through a switch using the ‘let’ syntax
+    * Use `break` instead of print (in the example) to skip that case
+    * Use `default:` to handle all the other cases if you don’t want to write them out
+* Can use multiple lines of code, and doesn’t move on to the next case - no fall through by default (use the `fallthrough` keyword)
+* Associated data is accessed through a switch using the `let` syntax
     * Can also rename the local variables to print
 * Can have methods and computed properties but no stored values
-* If you want to reassign ‘self’ to another value in a func, you must have ‘mutating’ because enum is a value type (all value types need to know when a value can change, such as struct)
+* If you want to reassign `self` to another value in a func, you must have `mutating` because enum is a value type (all value types need to know when a value can change, such as struct)
 
 #### Optionals
 * An optional is just a special enum with 2 cases (nil, and some associated data of a certain type)
-* ? declares an optional
-* ! force unwraps the associated data (could crash app if its nil)
-    * Safe way is using ‘if let’ to check if it is set
-* ?? defaults to a value if an optional is not set
-* ? can also be used for optional chaining
+* `?` declares an optional
+* `!` force unwraps the associated data (could crash app if its nil)
+    * Safe way is using `if let` to check if it is set
+* `??` defaults to a value if an optional is not set
+* `?` can also be used for optional chaining
     * If anything is nil, it just bails out of the sequence and returns nil
     * Example: If x, foo(), and bar are optionals
 
@@ -228,7 +226,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     * The heap is automatically kept clean by Swift
 * Struct
     * Value type (structs don’t live in the heap and are passed around by copying them)
-    * “Copy on write” behavior, so it requires you to mark ‘mutating’ methods
+    * “Copy on write” behavior, so it requires you to mark `mutating` methods
     * No inheritance of data
     * Examples of common structs: Array, Dictionary, String, Character, Int, Double
 * Enum
@@ -249,9 +247,9 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
         * Declaration (which properties and methods are in it)
         * A class, struct, or enum declaration that makes the claim to implement the protocol
         * The code in said class, struct or enum that implements the protocol
-    * Normally, the implementer must implement all the methods/properties, but marking a protocol ‘@objc’ and using ‘optional’ methods, you can use the old objective C code that allows you to skip some implementation (not to be confused with the type Optional)
+    * Normally, the implementer must implement all the methods/properties, but marking a protocol `@objc` and using `optional` methods, you can use the old objective C code that allows you to skip some implementation (not to be confused with the type Optional)
     * Any number of protocols can be implemented by a given class, struct or enum
-    * In a class, inits must be marked ‘required’ (or the subclass might not conform) 
+    * In a class, inits must be marked `required` (or the subclass might not conform) 
     * Can add protocol conformance via an extension too
     
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Protocol%20Declaration.png" width="600" height="150">
@@ -263,7 +261,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 #### Delegation
 * Very important use of protocols
 * Multiple Inheritance functionality
-    * Example: Arrays, Dictionaries, CountableRanges (for loops), and Strings implement the protocols Sequence and Collection, because they are sequences and therefore a collection of things – that’s why you can use ‘index(of:)’
+    * Example: Arrays, Dictionaries, CountableRanges (for loops), and Strings implement the protocols Sequence and Collection, because they are sequences and therefore a collection of things – that’s why you can use `index(of:)`
     
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Delegation.png" width="725" height="250">
 
@@ -272,9 +270,9 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Collection of characters (more specifically Unicodes)
 * The index of a string cannot be an int
     * The problem: The string “café” might have 4 Unicodes (with é) or 5 Unicodes (with a regular e and another to put an accent on it)
-* Simplest ways to get an index are ‘startIndex’, ‘endIndex’, and ‘index(of:)’
-* To move to another index, use ‘index(String.Index, offsetBy: Int)’
-* Use ‘.insert’ or ‘+’ to modify or add on to strings
+* Simplest ways to get an index are `startIndex`, `endIndex`, and `index(of:)`
+* To move to another index, use `index(String.Index, offsetBy: Int)`
+* Use `.insert` or `+` to modify or add on to strings
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Strings.png" width="675" height="250">
 
@@ -298,17 +296,17 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Example.png" width="400" height="100">
 
-* Using ‘.map’ (takes a function as an argument and applies it to each element) with a closure
+* Using `.map` (takes a function as an argument and applies it to each element) with a closure
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Map.png" width="600" height="150">
 
 * You can execute a closure to do initialization of a property
-* Useful with ‘lazy’ because the last () means it will execute the initialized right when it gets called
+* Useful with `lazy` because the last () means it will execute the initialized right when it gets called
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Init.png" width="375" height="100">
 
 * Using a closure that captures variables from surrounding code could create a memory cycle
-    * If you capture a class that arrayOfOperations is in, this closure is pointing to the class, and that class is pointing to the closure (use unowned to break it)
+    * If you capture a class that `arrayOfOperations` is in, this closure is pointing to the class, and that class is pointing to the closure (use unowned to break it)
     
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Closure%20Capture.png" width="725" height="150">
 
@@ -319,16 +317,15 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 #### Throwing an Error
 * Some methods can throw errors
-* Can also use optional errors ‘try?’ and it will create an optional of the return value if it is not set (where it fails and says nil)
+* Can also use optional errors `try?` and it will create an optional of the return value if it is not set (where it fails and says nil)
 
 #### Any and AnyObject
 * Special types (it can be any type) – for compatibility with old Objective-C
 * Sometimes it’s in a faction’s argument
-* You have to convert it to a known type
-    * Use ‘as?’ to cast it (usually along with ‘if let’ at the beginning)
+* You have to cast it to a known type
 
 #### Casting
-* Use ‘as?’ to cast 
+* Use `as?` to cast 
 * Usually done by casting an object from one of its superclasses down to a subclass (downcasting)
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Downcasting.png" width="600" height="250">
@@ -346,7 +343,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     
 #### Coordinate System 
 * CGFloat – always use this for anything UIView coordinates (no doubles/floats)
-    * Use conversions ‘let cgf = CGFloat(anExampleDouble)’
+    * Use conversions `let cgf = CGFloat(anExampleDouble)`
 * CGPoint
     * X and y
 * CGSize
@@ -359,18 +356,18 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     * The order of subviews matter since the most recent added thing is on top
     * Usually built in storyboard, but can also be done in code
 * Avoid using inits in views, but there are two if needed
-    * ‘init(frame:CGRect)’ if the UIView is created in code
-    * ‘init(coder:NSCoder)’ if the UIView comes out of a storyboard
+    * `init(frame:CGRect)` if the UIView is created in code
+    * `init(coder:NSCoder)` if the UIView comes out of a storyboard
 * If you need an init, use both inits
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/View%20Init.png" width="600" height="250">
 
-* ‘awakeFromNib()’ is only called if a view is from a storyboard
+* `awakeFromNib()` is only called if a view is from a storyboard
 * Origin is in upper left 
 * Units are points, not pixels
     * Depending on the device, a point could be 1, 2 or 3 pixels worth
 * Different views have their own coordinate system 
-* ‘var bounds: CGRect’ is a views drawing space
+* `var bounds: CGRect` is a views drawing space
 * Use frame or center to position a view (never used to draw)
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/View%20Rotation.png" width="600" height="250">
@@ -380,32 +377,32 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * For more complex views, you can create them in code for more flexibility and control
 
 #### Drawing (Core Graphics)
-* Only way to draw is using ‘override func draw(_ rect: CGRect)’
-* Never call ‘draw(CGRect)’
-    * If a view needs to be redrawn, use ‘setNeedsDisplay(_ rect: CGRect)’
+* Only way to draw is using `override func draw(_ rect: CGRect)`
+* Never call `draw(CGRect)`
+    * If a view needs to be redrawn, use `setNeedsDisplay(_ rect: CGRect)`
 * Steps to draw
-    * Use ‘UIGraphicsGetCurrentContext’ to get a context to draw into (UIBezierPath does this automatically)
+    * Use `UIGraphicsGetCurrentContext` to get a context to draw into (UIBezierPath does this automatically)
     * Create paths using lines, arcs, jumps, etc.
     * Set attributes like colors, fonts, linewidths, etc.
     * Stroke or fill the created paths
 * UIBezierPath uses all the necessary drawing functions
-* Example: Draw a triangle (put this code in the 'override func draw' function)
+* Example: Draw a triangle (put this code in the `override func draw` function)
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Drawing%20UIBezierPath.png" width="550" height="250">
 
 * Check out documentation for UIBezierPath to use ovals, clipping, hit detection, etc.
 * Use UIColor or color literals to set colors
-    * To get transparency, use ‘.withAlphaComponent(0.someNumber)’ and let the system know with ‘var opaque = false’
+    * To get transparency, use `.withAlphaComponent(0.someNumber)` and let the system know with `var opaque = false`
 * Use preferred fonts to implement text accessibility options (smaller/larger text in iPhone settings)
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Preferred%20Fonts.png" width="450" height="150">
 
-* Init images using ‘let exampleImageName: UIImage? = (UIImage(named: “foo”)’ and draw them using ‘draw.exampleImageName()’ with a bunch of function options
+* Init images using `let exampleImageName: UIImage? = (UIImage(named: “foo”)` and draw them using `draw.exampleImageName()` with a bunch of function options
     * Then add foo.jpg to the assets.xcassets file 
 * Bounds can change
-    * There is a property ‘var contentMode: UIViewContentMode’
-        * Check documentation for properties (such as ‘.scaleToFill’ or ‘.redraw’)
-    * When not using auto layout, use ‘override func layoutSubviews()’ to manually reposition views (don’t forget super)
+    * There is a property `var contentMode: UIViewContentMode’`
+        * Check documentation for properties (such as `.scaleToFill` or `.redraw`)
+    * When not using auto layout, use `override func layoutSubviews()` to manually reposition views (don’t forget super)
 
 ## Lecture 6
 **Multitouch - Card Game Project Example**
@@ -413,14 +410,14 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 #### Centering Text and implementing text accessibility (generic function)
 * Use preferred font and scale function with UIFontMetrics
 * Use paragraphStyle to center all the text
-* Use ‘traitCollectionDidChange’ to redraw the size of the accessibility text
-    * Call 'setNeedsDisplay()' and 'setNeedsLayout'
+* Use `traitCollectionDidChange` to redraw the size of the accessibility text
+    * Call `setNeedsDisplay()` and `setNeedsLayout`
 * This is used to help format the rank and suit text in the corners of the card
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Text%20Accessibility%20Example.png" width="500" height="150">
 
 #### Public vars
-* Always use ‘didSet{}’ and call ‘setNeedsDisplay()’ when you need to update (redraw) the view, along with ‘setNeedsLayout()’ if you need subviews to be redrawn too
+* Always use `didSet{}` and call `setNeedsDisplay()` when you need to update (redraw) the view, along with `setNeedsLayout()` if you need subviews to be redrawn too
 
 #### Constants 
 * You usually want to segregate constants from the main code
@@ -428,7 +425,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 #### Labels
 * Every time the bounds change, create the corner labels
-* ‘label.numberOfLines = 0’ means to use as many lines needed
+* `label.numberOfLines = 0` means to use as many lines needed
 * LayoutSubviews redraws the subviews (labels)
 * CGAffineTransform can rotate and translate views to make the bottom label upside down
 
@@ -439,20 +436,20 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * Change layout priority (if you have conflicting constraints)
     * You can change from max (1000) to high (750) or low (250) and the layout will try to satisfy all the restraints to the best of its ability 
         * Example: Trying to make a playing card as big as possible without going off the screen
-* Put ‘@IBDesignable’ a line above the class/struct so you can see it displayed in the storyboard (without pressing run)
-    * Attach the ‘in: Bundle…’ section of code for compatibility to show images in storyboard and during runtime
+* Put `@IBDesignable` a line above the class/struct so you can see it displayed in the storyboard (without pressing run)
+    * Attach the `in: Bundle…` section of code for compatibility to show images in storyboard and during runtime
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Autolayout%20Card%20Example.png" width="400" height="150">
 
-* Put ‘@IBInspectable’ above a var to have them show up in the storyboard attributes inspector
+* Put `@IBInspectable` above a var to have them show up in the storyboard attributes inspector
 
 #### Gestures
 * Two steps to use a gesture recognizer
     * Adding a gesture recognizer to a UIView (asking the view to recognize that gesture)
     * Providing a method to handle that gesture
 * Every time the recognizer state changes, the handler is called
-    * For continuous gestures (e.g. panning), it moves from ‘.began’ through repeated ‘.changed’ to ‘.ended’ states
-    * For discrete (e.g. a swipe), it goes strait to ‘.ended’ or ‘.recognized’, but also could go to ‘.failed’ or ‘.cancelled’
+    * For continuous gestures (e.g. panning), it moves from `.began` through repeated `.changed` to `.ended` states
+    * For discrete (e.g. a swipe), it goes strait to `.ended` or `.recognized`, but also could go to `.failed` or `.cancelled`
 * Types of recognizers (Pinch/Rotation/Swipe/Tap/LongPress)
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Recognizers%201.png" width="600" height="250">
@@ -461,8 +458,8 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 * Always switch on a state in the handler function
 * Example: Swipe through random playing cards
-    * Use ‘nextCard’ method to get a rank and suit when swiped left or right
-    * Any method that is the action has to be marked ‘@objc’
+    * Use `nextCard` method to get a rank and suit when swiped left or right
+    * Any method that is the action has to be marked `@objc`
 
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Recognizer%20Example.png" width="400" height="150">
 
