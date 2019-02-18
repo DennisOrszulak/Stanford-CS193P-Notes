@@ -614,13 +614,13 @@ scrollview example 1
 
 scrollview example 2
 
-* When the image is on the screen, fetch the image (expensive task in viewDidAppear trick)
+* When the image is on the screen, fetch the image (expensive task in `viewDidAppear` trick)
 
 scrollview example 3
 
 * Drag to link the UIScrollView to code and add it as a sub view of the image.
-* Set the min and max zoom and set the delegate to .self (you also have to make delegate after the class)
-* Then set the zoom area to the image using ‘viewForZooming()’
+* Set the min and max zoom and set the delegate to `.self` (you also have to make delegate after the class)
+* Then set the zoom area to the image using `viewForZooming()`
 
 scrollview example 4
 
@@ -642,10 +642,67 @@ scrollview example 5
 ## Lecture 10
 **Multithreading**
 
-## Lecture 11
-**Drag and Drop, UITableView, and UICollectionView**
+#### Queues 
+* Main Queue 
+   * UI activities must occur on this thread only
+* Global Queues 
+   * UserInteractive – (rare) 
+      * High priority
+      * Usually quick UI interactive threads
+     * UserInitiated – (most common)
+      * High priority
+      * When the user asks for something
+   * Background
+      * Low priority
+      * Not directly initiated by the user
+      * Can run slow
+   * Utility
+      * Low priority
+      * Long-running background processes
+* How to implement a queue (Most of the time we use `queue.async`)
 
-## Lecture 15
-**Alerts, Notifications, Application Lifecycle** 
+queue pic
+
+* `OperationQueue` and `Operation` can be used for more complicated (math) multithreading
+
+#### iOS API Example (e.g. fetching data on the network but also updating the UI)
+* Walking through code step by step in order:
+   1. A
+   2. B, just creates a `dataTask` and assign it to `task` and returns immediately
+   3. G, lets C, D, E, and F go to another queue and returns 
+   4. H, and the url fetching task has probably begun in another thread
+   5. A, B, G, H all ran back to back with no delay
+   6. C, executes later because it was waiting for the data
+   7. D, just gets in line with the main thread and returns immediately
+   8. F
+   9. E, executes when the main thread gets to it (usually very quickly)
+      * The order could go E then F depending on the main queues availability
+
+async example pic
+
+#### Cassini Example Continued
+* Make iPhone and iPad compatible app: On first VC, Embed In -> Nav Controller, then add a UISplitView, Master is the first VC, detail is the second VC 
+* Setting up the segue
+   * If the identifier can be found in the demoURL class, then if you can downcast the new image view, set the imageURL variable (from last lecture) to the selected url
+   * Display the current title of the button 
+      * Segueing by using the title of the button is bad (since the title can change), but displaying this text isn’t bad because it will show the title of whatever the button has (e.g. if you need to change it to a different language)
+   * Go back to `image: UIImage?` and make ScrollView and optional because outlets (UIScrollView) are not set in the prepare for segue
 
 
+cassini prepare for segue
+
+
+* Multi-thread the fetch image code (check for pointers/memory cycles)
+* Since `self?.image` is pointing to itself in the heap, it will never leave even if the user doesn’t want it to load. Use `weak self` to let it leave the heap when it’s not needed.
+* Use the main thread to set UI stuff
+* Since the data might take a long time to fetch, check to see if the url is equal to the current imageURL
+
+
+fetch image example
+
+
+* Put title on iPad detail page
+* Embed the detail page in a nav controller
+* Create `UIViewController` extension to check if the segue destination is also a nav controller
+
+cassini uiviewcontroller extension pic
