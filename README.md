@@ -6,8 +6,10 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     * Intro to iOS 11, Xcode 9, and Swift 4
 * [Lecture 2](#lecture-2)
     * MVC
-* [Lecture 3 and 4](#lecture-3-and-4)
+* [Lecture 3](#lecture-3)
     * The Swift Programming Language
+* [Lecture 4](#lecture-4)
+    * The Swift Programming Language Continued
 * [Lecture 5](#lecture-5)
     * Drawing
 * [Lecture 6](#lecture-6)
@@ -118,7 +120,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 
 
 
-## Lecture 3 and 4
+## Lecture 3
 **Swift Programming Language**
 
 #### Stack view
@@ -217,6 +219,10 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     * Very rare, because it’s like trying to outsmart the ARC
     * The programmer has to know not to access it when it’s not in the heap
     * Use it to avoid a memory cycle – 2 pointers linked only to each other in the heap, so they both stay in the heap for no reason
+
+
+## Lecture 4
+**Swift Programming Language Continued**
 
 #### Data Structures
 * Essential building concepts – class, struct, enum, protocol
@@ -471,31 +477,167 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 <img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/VC%20Swipe%20and%20Pinch.png" width="575" height="150">
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Lecture 7
-**Multiple MVC's, Timer, and Animation
+**Multiple MVC's, Timer, and Animation**
 
-## Lecture 8
-**View Controller Lifecycle and Scroll View**
+#### Types of MVC’s controllers (iOS provided)
+* UITabBarController
+    * Simplest MVC to use
+    * Let’s the user choose between different MVC’s
+* UISplitViewController
+    * Two MVC’s side-by-side
+    * The usually smaller left side is the Master (e.g. a calculator) and the right side is the detail (e.g. a graph of the calculator equation)
+    * Works on iPhone +’s and iPad
+* UINavigationController
+    * Most powerful because MVC’s stack (think of it as a deck of cards)
+        * Going to new pages = stack new MVC on top
+        * Going back a page = throws the MVC out of the heap
+    * `var navigationItem` includes properties for that page
+    
+#### Sub-MVC’s
+    Pic
+    Pic
+    
+* Drag out a controller and ctrl-drag to the other MVC’s to link them together	
+* To make these work on both iPads/iPhones, you usually go to Editor -> Embed In -> Navigation Controller
+
+#### Segues
+* Always makes a new instance of an MVC and adds it to the stack or split view
+* Types of Segues
+    * Show – works in nav controller, puts the MVC on the top of the stack
+    * Show Detail – works in split view
+    * Modal – takes over the entire screen with an MVC
+    * Popover – a type of Modal, but only takes up a portion of the screen
+* Ctrl-drag to make a segue, and give an identifier in the attributes inspector
+* Manually perform segue in code using `func performSegue`
+* Prepare for segue
+    * Check identifier to see which one you’re preparing for
+    * Use a switch or if statement based on the identifier
+    * Downcast the destination to your custom controller and set up the properties needed for the next MVC
+
+pic
+
+* Warning: This is happening before outlets are set (Do not send data to outlets)
+* Collect data in `prepare`, then talk to outlets in `viewDidLoad` from the new MVC
+
+#### Segue Example: Changing theme of a card matching game
+
+segue pic example
+
+* How to segue in code
+    * Ctrl-drag from the yellow icon at the top of the storyboard to another view (basically controller to controller, not specific objects to another controller)
+    * Using this code resets the UI and you lose all current data
+
+perform segue example pic
+
+* NOTE: Do not segue if you want to update UI without resetting everything and making a new MVC
+
+* How to segue but not reset everything
+* On iPad/Plus only: Find the ConcentrationViewController in the split view detail, get the theme, then set the other controllers theme
+
+segue no reset example
+
+* To make iPhone compatible:  Make a var to temporarily hold the last ConcentrationViewController in the heap, then use ‘pushViewController’ to push it onto the navigation stack
+
+segue iphone 1 and 2 examples
+
+* Make iPhone go to the master page instead of detail
+* Use `collapseSecondary` so that when the theme is not set (at startup) it goes to the primary view 
+
+seguue iphone 3 example pic
+
+#### Timer
+* Not used for single millisecond type resolution when called
+* Use `scheduledTimer()` to setup a timer
+* `timer.invalidate()` can stop a repeating timer (the pointer will be set to nil and thrown out of the heap)
+* Set tolerance with `.tolerance` to give some wiggle room on when a timer goes off if it’s not important to keep it totally constant
+
+timer pic
+
+#### Animation (most are beyond the scope of the course)
+* UIView properties (like frame of transparency)
+* Controller transitions
+* Core Animation 
+* OpenGL and Metal for 3D
+* SpriteKit
+* Dynamic Animation for physics-based
+
+
+
+
+
+
+
+
+
+`scheduledTimer()`
 
 ## Lecture 9
 **View Controller Lifecycle and Scroll View**
+
+#### Lifecycle Summary (don’t forget `super`)
+* `awakeFromNib()` 
+    * Is sent to all objects in the storyboard to wake them up
+    * Very early in the lifecycle
+    * Used as last resort – try to put code in the other ones first 
+* `viewDidLoad()` – Only called once on a MVC
+    * Do the primary setup of the MVC here
+    * Good time to update the view from the model
+    * Do not do geometry-related things – The bounds are not set yet
+* `viewWillAppear()` – Can be called multiple times
+    * Catch up with what happened off screen (e.g. update from database)
+* `viewDidAppear()` –  MVC on screen
+    * Maybe start a timer/animation or observe something (e.g. GPS)
+    * Usually start a compute expensive or time-consuming thing (e.g. downloading from internet)
+* `viewWillDisappear()` – MVC About to go off screen
+    * Stop the timer/compute expensive thing
+* `viewDidDisappear()` – MVC Went off screen
+    * Rarely used
+    * Maybe save the current state or clean up MVC
+
+#### Geometry
+* Good places to put geometry changes if you’re not using Autolayout - `viewWillLayoutSubviews()` and `viewDidLayoutSubviews()`
+
+#### UIScrollView
+* Drag it to a storyboard, use `UIScrollView(frame:)` in code, or Embed In -> Scroll View
+* You have to set the `.contentSize` (the whole size of the thing you want to scroll such as an image)
+* Zooming
+    * `.minimumZoomScale` and `.maximumZoomScale` have to be set to zoom correctly (both default to 1.0)
+    * `func viewForZooming` delegate needs to be set to specify the particular UIView to zoom
+
+#### Example: ScrollView with Cassini images
+* Made an image of type URL that will reset the image, and fetch the image if the image window is currently on the screen
+
+scrollview example 1
+
+* Get the image or set the new image, tell it to fit the intrinsic size and set the content size to the image size 
+
+scrollview example 2
+
+* When the image is on the screen, fetch the image (expensive task in viewDidAppear trick)
+
+scrollview example 3
+
+* Drag to link the UIScrollView to code and add it as a sub view of the image.
+* Set the min and max zoom and set the delegate to .self (you also have to make delegate after the class)
+* Then set the zoom area to the image using ‘viewForZooming()’
+
+scrollview example 4
+
+* To fetch the image, try to get the data from the URL and if the system can, display it as the image
+
+scrollview example 5
+
+
+
+
+
+
+
+
+
+
+
 
 ## Lecture 10
 **Multithreading**
