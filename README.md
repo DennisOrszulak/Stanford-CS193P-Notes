@@ -19,11 +19,7 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
 * [Lecture 9](#lecture-9)
     * View Controller Lifecycle and Scroll View
 * [Lecture 10](#lecture-10)
-    * Multithreading
-* [Lecture 11](#lecture-11)
-    * Drag and Drop, UITableView, and UICollectionView
-* [Lecture 15](#lecture-11)
-    * Alerts, Notifications, Application Lifecycle      
+    * Multithreading    
 
 ## Lecture 1
 **Intro to iOS 1, Xcode 9, and Swift 4**
@@ -493,14 +489,16 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
         * Going to new pages = stack new MVC on top
         * Going back a page = throws the MVC out of the heap
     * `var navigationItem` includes properties for that page
-    
-#### Sub-MVC’s
-    Pic
-    Pic
-    
+
+#### Sub MVC's
+
 * Drag out a controller and ctrl-drag to the other MVC’s to link them together	
 * To make these work on both iPads/iPhones, you usually go to Editor -> Embed In -> Navigation Controller
 
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Sub-MVC%201.png" width="600" height="175">
+    
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Sub-MVC%202.png" width="600" height="175">
+    
 #### Segues
 * Always makes a new instance of an MVC and adds it to the stack or split view
 * Types of Segues
@@ -514,37 +512,35 @@ Quick notes taken for Stanford's CS193P iTunes U Course (Fall 2017)
     * Check identifier to see which one you’re preparing for
     * Use a switch or if statement based on the identifier
     * Downcast the destination to your custom controller and set up the properties needed for the next MVC
-
-pic
-
 * Warning: This is happening before outlets are set (Do not send data to outlets)
 * Collect data in `prepare`, then talk to outlets in `viewDidLoad` from the new MVC
 
 #### Segue Example: Changing theme of a card matching game
 
-segue pic example
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Segue%20Example.png" width="425" height="250">
 
 * How to segue in code
     * Ctrl-drag from the yellow icon at the top of the storyboard to another view (basically controller to controller, not specific objects to another controller)
     * Using this code resets the UI and you lose all current data
 
-perform segue example pic
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Perform%20Segue%20Example.png" width="350" height="50">
 
 * NOTE: Do not segue if you want to update UI without resetting everything and making a new MVC
 
 * How to segue but not reset everything
-* On iPad/Plus only: Find the ConcentrationViewController in the split view detail, get the theme, then set the other controllers theme
+   * On iPad/Plus only: Find the ConcentrationViewController in the split view detail, get the theme, then set the other controllers theme
 
-segue no reset example
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Segue%20Example.png" width="425" height="250">
 
-* To make iPhone compatible:  Make a var to temporarily hold the last ConcentrationViewController in the heap, then use ‘pushViewController’ to push it onto the navigation stack
+   * To make iPhone compatible:  Make a var to temporarily hold the last ConcentrationViewController in the heap, then use ‘pushViewController’ to push it onto the navigation stack
 
-segue iphone 1 and 2 examples
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Segue%20iPhone%20Example.png" width="425" height="125">
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Segue%20iPhone%20Example%202.png" width="425" height="150">
 
-* Make iPhone go to the master page instead of detail
+   * Make iPhone go to the master page instead of detail
 * Use `collapseSecondary` so that when the theme is not set (at startup) it goes to the primary view 
 
-seguue iphone 3 example pic
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Segue%20iPhone%20Example%203.png" width="425" height="225">
 
 #### Timer
 * Not used for single millisecond type resolution when called
@@ -554,6 +550,8 @@ seguue iphone 3 example pic
 
 timer pic
 
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Timer.png" width="550" height="175">
+
 #### Animation (most are beyond the scope of the course)
 * UIView properties (like frame of transparency)
 * Controller transitions
@@ -561,16 +559,6 @@ timer pic
 * OpenGL and Metal for 3D
 * SpriteKit
 * Dynamic Animation for physics-based
-
-
-
-
-
-
-
-
-
-`scheduledTimer()`
 
 ## Lecture 9
 **View Controller Lifecycle and Scroll View**
@@ -608,25 +596,25 @@ timer pic
 #### Example: ScrollView with Cassini images
 * Made an image of type URL that will reset the image, and fetch the image if the image window is currently on the screen
 
-scrollview example 1
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Scrollview%20Example%201.png" width="425" height="150">
 
 * Get the image or set the new image, tell it to fit the intrinsic size and set the content size to the image size 
 
-scrollview example 2
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Scrollview%20Example%202.png" width="425" height="150">
 
 * When the image is on the screen, fetch the image (expensive task in `viewDidAppear` trick)
 
-scrollview example 3
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Scrollview%20Example%203.png" width="425" height="100">
 
 * Drag to link the UIScrollView to code and add it as a sub view of the image.
 * Set the min and max zoom and set the delegate to `.self` (you also have to make delegate after the class)
 * Then set the zoom area to the image using `viewForZooming()`
 
-scrollview example 4
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Scrollview%20Example%204.png" width="425" height="175">
 
 * To fetch the image, try to get the data from the URL and if the system can, display it as the image
 
-scrollview example 5
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Scrollview%20Example%205.png" width="425" height="175">
 
 
 
@@ -661,8 +649,7 @@ scrollview example 5
       * Long-running background processes
 * How to implement a queue (Most of the time we use `queue.async`)
 
-queue pic
-
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Queue.png" width="550" height="75">
 * `OperationQueue` and `Operation` can be used for more complicated (math) multithreading
 
 #### iOS API Example (e.g. fetching data on the network but also updating the UI)
@@ -676,9 +663,9 @@ queue pic
    7. D, just gets in line with the main thread and returns immediately
    8. F
    9. E, executes when the main thread gets to it (usually very quickly)
-      * The order could go E then F depending on the main queues availability
+   * The order could go E then F depending on the main queues availability
 
-async example pic
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Async%20Example.png" width="550" height="200">
 
 #### Cassini Example Continued
 * Make iPhone and iPad compatible app: On first VC, Embed In -> Nav Controller, then add a UISplitView, Master is the first VC, detail is the second VC 
@@ -688,21 +675,17 @@ async example pic
       * Segueing by using the title of the button is bad (since the title can change), but displaying this text isn’t bad because it will show the title of whatever the button has (e.g. if you need to change it to a different language)
    * Go back to `image: UIImage?` and make ScrollView and optional because outlets (UIScrollView) are not set in the prepare for segue
 
-
-cassini prepare for segue
-
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Cassini%20Prepare%20For%20Segue%20Example.png" width="500" height="250">
 
 * Multi-thread the fetch image code (check for pointers/memory cycles)
 * Since `self?.image` is pointing to itself in the heap, it will never leave even if the user doesn’t want it to load. Use `weak self` to let it leave the heap when it’s not needed.
 * Use the main thread to set UI stuff
 * Since the data might take a long time to fetch, check to see if the url is equal to the current imageURL
 
-
-fetch image example
-
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Fetching%20Cassino%20Image%20Example.png" width="525" height="225">
 
 * Put title on iPad detail page
 * Embed the detail page in a nav controller
 * Create `UIViewController` extension to check if the segue destination is also a nav controller
 
-cassini uiviewcontroller extension pic
+<img src="https://github.com/DennisOrszulak/Stanford-CS193P-Notes/blob/master/Standford%20CS193%20Slide%20Screenshots/Cassini%20UIVIewController%20Extension%20Example.png" width="475" height="325">
